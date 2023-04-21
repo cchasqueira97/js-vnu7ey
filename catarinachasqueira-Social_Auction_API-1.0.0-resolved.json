@@ -1,0 +1,1644 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger Social Auction",
+    "description": "This is a sample Petstore server.  You can find\nout more about Swagger at\n[http://swagger.io](http://swagger.io) or on\n[irc.freenode.net, #swagger](http://swagger.io/irc/).\n",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/catarinachasqueira/Social_Auction_API/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://virtserver.swaggerhub.com/CATARINADEMARIA/SocialAuction/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://virtserver.swaggerhub.com/CATARINADEMARIA/socialauctionfinal/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://petstore.swagger.io/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "autenticacao",
+      "description": "login/sign in"
+    },
+    {
+      "name": "produtos",
+      "description": "gestao de produtos pelo utilizador que os coloca"
+    },
+    {
+      "name": "licitacoes",
+      "description": "o utilizador pode fazer licitacoese gerir licitacoes"
+    },
+    {
+      "name": "pagamentos",
+      "description": "o utilizador pode fazer e gerir pagamentos"
+    },
+    {
+      "name": "conversas",
+      "description": "chat para utilizadores"
+    },
+    {
+      "name": "denuncias/reclamacoes",
+      "description": "area de reclamações e denúncias"
+    },
+    {
+      "name": "delivery",
+      "description": "envio de encomendas/produtos"
+    }
+  ],
+  "paths": {
+    "/user/{id}": {
+      "get": {
+        "tags": [
+          "autenticacao"
+        ],
+        "summary": "Get user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "autenticacao"
+        ],
+        "summary": "Delete user by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          }
+        }
+      }
+    },
+    "/user/{id}/newpassword": {
+      "put": {
+        "tags": [
+          "autenticacao"
+        ],
+        "summary": "Set new password",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "security question",
+            "in": "query",
+            "description": "New Password",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/Password"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Password changed!"
+          }
+        }
+      }
+    },
+    "/user": {
+      "put": {
+        "tags": [
+          "autenticacao"
+        ],
+        "summary": "Add new user",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "query",
+            "description": "User object to be added",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User added successfully"
+          }
+        }
+      }
+    },
+    "/app/server/": {
+      "delete": {
+        "tags": [
+          "autenticacao"
+        ],
+        "summary": "Delete contas fantasma",
+        "responses": {
+          "204": {
+            "description": "Contas apagadas"
+          }
+        }
+      }
+    },
+    "/user/{id}/product": {
+      "get": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "O utilizador pode ver a lista dos seus produtos",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "O utilizador pode ver a lista dos seus produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Products"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "O utilizador pode adicionar um produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "description": "object to be added",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "produto adicionado"
+          }
+        }
+      }
+    },
+    "/user_id/{user_id}/product/{product_id}": {
+      "delete": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "Delete a product added by the user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of the product to be deleted",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "Confirmation of the user ID owner of the product",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Product deleted successfully"
+          },
+          "404": {
+            "description": "Product not found or user is not authorized to delete it"
+          }
+        }
+      }
+    },
+    "/user/{id}/auctions_id/{auctions_number}": {
+      "get": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "O utilizador pode ver a lista dos seus leiloes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "auctions_number",
+            "in": "path",
+            "description": "information about the auctions",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "O utilizador pode ver a lista dos seus leiloes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auctions"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "Criar um leilao de um produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "auctions_number",
+            "in": "path",
+            "description": "auction description",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Auction created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "User or product not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "produtos"
+        ],
+        "summary": "Delete a auction added by the user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "auctions_number",
+            "in": "path",
+            "description": "ID of the auction to be deleted",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Auction deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auctions"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Auction not found or user is not authorized to delete it"
+          }
+        }
+      }
+    },
+    "/user/{id}/licitation/{licitation_number}": {
+      "get": {
+        "tags": [
+          "licitacoes"
+        ],
+        "summary": "O utilizador pode ver as suas licitações",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "licitation_number",
+            "in": "path",
+            "description": "information about licitations",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Licitacoes do utilizador",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Licitations"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "licitacoes"
+        ],
+        "summary": "O utilizador pode fazer uma licitacao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "licitation_number",
+            "in": "path",
+            "description": "creating a licitation",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "$ref": "#/components/schemas/Licitation"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "licitacao feita",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Licitations"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Erro na licitacao"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "licitacoes"
+        ],
+        "summary": "Delete a licitation added to a product",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "licitation_number",
+            "in": "path",
+            "description": "ID of the auction to be deleted",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Licitation deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Licitation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Licitation not found or user is not authorized to delete it"
+          }
+        }
+      }
+    },
+    "/user/{id}/payments/{payment_data}": {
+      "get": {
+        "tags": [
+          "pagamentos"
+        ],
+        "summary": "ver todos os pagamentos",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "payment_data",
+            "in": "path",
+            "description": "payment area",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "List of payments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "pagamentos"
+        ],
+        "summary": "pagar um produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "payment_data",
+            "in": "path",
+            "description": "payment area",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Payment confirmed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Card"
+          },
+          "404": {
+            "description": "Payment Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "pagamentos"
+        ],
+        "summary": "Delete card information and data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "payment_data",
+            "in": "path",
+            "description": "ID of the card to be deleted",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Card information deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payments"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/receipt/{receipt_nr}": {
+      "get": {
+        "tags": [
+          "pagamentos"
+        ],
+        "summary": "payment receipt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "receipt_nr",
+            "in": "path",
+            "description": "Licitation Payment Receipt",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Receipt Sent to e-mail",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Receipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/chat/{message_number}": {
+      "get": {
+        "tags": [
+          "conversas"
+        ],
+        "summary": "chat",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "message_number",
+            "in": "path",
+            "description": "Messages Sent and Received",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Chat Available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chat"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "conversas"
+        ],
+        "summary": "chat",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "message_number",
+            "in": "path",
+            "description": "Answer Messages",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Message Received",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No Messages"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "conversas"
+        ],
+        "summary": "chat",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "message_number",
+            "in": "path",
+            "description": "Message user A to user B",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Message sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chat"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Message not sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "conversas"
+        ],
+        "summary": "chat",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "message_number",
+            "in": "path",
+            "description": "Delete messages",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Message Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chat"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/complaint/{complaint_nr}": {
+      "get": {
+        "tags": [
+          "denuncias/reclamacoes"
+        ],
+        "summary": "reclamacoes do utilizador",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "complaint_nr",
+            "in": "path",
+            "description": "User complains",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "list of Complaints",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Complaints"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "denuncias/reclamacoes"
+        ],
+        "summary": "utilizador faz uma reclamacao",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "complaint_nr",
+            "in": "path",
+            "description": "User complain",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Complaint receive",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Complaints"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "denuncias/reclamacoes"
+        ],
+        "summary": "delete solved complaints",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "complaint_nr",
+            "in": "path",
+            "description": "User complains",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Complaint deleted with sucess",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Complaints"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}/delivery/{delivery_number}": {
+      "get": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "delivery request",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "delivery_number",
+            "in": "path",
+            "description": "User Delivery Service",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "List of delivery request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "Sent Product",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "delivery_number",
+            "in": "path",
+            "description": "User Delivery Service",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "user asks for a delivery of a product",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "delivery_number",
+            "in": "path",
+            "description": "User Delivery Service",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Delivery Services Request Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "delivery"
+        ],
+        "summary": "delete old request",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user to retrieve or delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "delivery_number",
+            "in": "path",
+            "description": "User Delivery Service",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Delivery"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Delivery": {
+        "required": [
+          "adress",
+          "e-mail",
+          "fiscalNumber",
+          "name",
+          "product ID",
+          "user ID"
+        ],
+        "type": "object",
+        "properties": {
+          "user ID": {
+            "type": "integer",
+            "description": "Unique identifier for the user",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "e-mail": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "adress": {
+            "type": "string",
+            "description": "User fiscal adress"
+          },
+          "fiscalNumber": {
+            "type": "integer",
+            "description": "User fiscal number",
+            "format": "int64"
+          },
+          "product ID": {
+            "type": "string",
+            "description": "User product ID"
+          }
+        }
+      },
+      "Complaints": {
+        "required": [
+          "adress",
+          "complaint",
+          "e-mail",
+          "fiscalNumber",
+          "name",
+          "user ID"
+        ],
+        "type": "object",
+        "properties": {
+          "user ID": {
+            "type": "integer",
+            "description": "Unique identifier for the user",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "e-mail": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "adress": {
+            "type": "string",
+            "description": "User fiscal adress"
+          },
+          "fiscalNumber": {
+            "type": "integer",
+            "description": "User fiscal number",
+            "format": "int64"
+          },
+          "Complaint": {
+            "type": "string",
+            "description": "User complaint"
+          }
+        }
+      },
+      "Chat": {
+        "required": [
+          "message",
+          "productId",
+          "userToContact"
+        ],
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "description": "Id do produto sobre o qual há questões",
+            "format": "int64"
+          },
+          "userToContact": {
+            "type": "integer",
+            "description": "Id do user a ser contactado",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string",
+            "description": "mensagem a ser enviada",
+            "format": "int64"
+          }
+        }
+      },
+      "Receipt": {
+        "required": [
+          "date",
+          "e-mail",
+          "fiscalAdress",
+          "fiscalNumber",
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the user",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "e-mail": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "fiscalNumber": {
+            "type": "integer",
+            "description": "User fiscal number",
+            "format": "int64"
+          },
+          "date": {
+            "type": "integer",
+            "description": "Actual date in the format YYYY-MM-DD",
+            "format": "int64"
+          },
+          "fiscalAdress": {
+            "type": "string",
+            "description": "User fiscal adress"
+          }
+        }
+      },
+      "Payments": {
+        "required": [
+          "card_data",
+          "email",
+          "fiscal_number",
+          "id",
+          "name",
+          "securityQuestion"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the user",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "card_data": {
+            "type": "integer",
+            "description": "Card information to make the payment",
+            "format": "int64"
+          },
+          "securityQuestion": {
+            "type": "string",
+            "description": "User's security question"
+          },
+          "fiscal_number": {
+            "type": "integer",
+            "description": "User fiscal number",
+            "format": "int64"
+          }
+        }
+      },
+      "Licitation": {
+        "required": [
+          "licitation day",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "string",
+            "description": "licitation price"
+          },
+          "licitation day": {
+            "type": "string",
+            "description": "Licitation's date in the format YYYY-MM-DD",
+            "format": "date"
+          }
+        }
+      },
+      "Licitations": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Licitation"
+        }
+      },
+      "Auction": {
+        "required": [
+          "dateOfEnd",
+          "dateOfStart",
+          "inicial price",
+          "product id"
+        ],
+        "type": "object",
+        "properties": {
+          "product id": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "inicial price": {
+            "type": "string",
+            "description": "preco inicial do leilao"
+          },
+          "dateOfstart": {
+            "type": "string",
+            "description": "Auction's date of start in the format YYYY-MM-DD",
+            "format": "date"
+          },
+          "dateOfEnd": {
+            "type": "string",
+            "description": "Auction's date of end in the format YYYY-MM-DD",
+            "format": "date"
+          }
+        }
+      },
+      "Auctions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Auction"
+        }
+      },
+      "Old_Auctions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Old_Auctions"
+        }
+      },
+      "Innactive_Auctions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Innactive_Auctions"
+        }
+      },
+      "Product": {
+        "required": [
+          "description",
+          "pictures",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "título"
+          },
+          "pictures": {
+            "type": "array",
+            "description": "pictures list",
+            "items": {
+              "$ref": "#/components/schemas/Picture"
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "product description"
+          }
+        }
+      },
+      "Products": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Product"
+        }
+      },
+      "Picture": {
+        "type": "string",
+        "description": "base64 encoded image"
+      },
+      "User": {
+        "required": [
+          "dateOfBirth",
+          "email",
+          "id",
+          "name",
+          "securityQuestion"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the user",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email address"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "User's date of birth in the format YYYY-MM-DD",
+            "format": "date"
+          },
+          "securityQuestion": {
+            "type": "string",
+            "description": "User security question"
+          }
+        }
+      },
+      "Password": {
+        "required": [
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "description": "Password text"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "id": {
+        "name": "id",
+        "in": "path",
+        "description": "ID of the user to retrieve or delete",
+        "required": true,
+        "style": "simple",
+        "explode": false,
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
