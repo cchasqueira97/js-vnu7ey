@@ -63,9 +63,7 @@
   "paths": {
     "/user/{id}": {
       "get": {
-        "tags": [
-          "autenticacao"
-        ],
+        "tags": ["autenticacao"],
         "summary": "Get user by ID",
         "parameters": [
           {
@@ -95,9 +93,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "autenticacao"
-        ],
+        "tags": ["autenticacao"],
         "summary": "Delete user by ID",
         "parameters": [
           {
@@ -122,9 +118,7 @@
     },
     "/user/{id}/newpassword": {
       "put": {
-        "tags": [
-          "autenticacao"
-        ],
+        "tags": ["autenticacao"],
         "summary": "Set new password",
         "parameters": [
           {
@@ -160,9 +154,7 @@
     },
     "/user": {
       "put": {
-        "tags": [
-          "autenticacao"
-        ],
+        "tags": ["autenticacao"],
         "summary": "Add new user",
         "parameters": [
           {
@@ -186,9 +178,7 @@
     },
     "/app/server/": {
       "delete": {
-        "tags": [
-          "autenticacao"
-        ],
+        "tags": ["autenticacao"],
         "summary": "Delete contas fantasma",
         "responses": {
           "204": {
@@ -199,9 +189,7 @@
     },
     "/user/{id}/product": {
       "get": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "O utilizador pode ver a lista dos seus produtos",
         "parameters": [
           {
@@ -231,9 +219,7 @@
         }
       },
       "post": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "O utilizador pode adicionar um produto",
         "parameters": [
           {
@@ -269,9 +255,7 @@
     },
     "/user_id/{user_id}/product/{product_id}": {
       "delete": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "Delete a product added by the user",
         "parameters": [
           {
@@ -323,9 +307,7 @@
     },
     "/user/{id}/auctions_id/{auctions_number}": {
       "get": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "O utilizador pode ver a lista dos seus leiloes",
         "parameters": [
           {
@@ -367,9 +349,7 @@
         }
       },
       "put": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "Criar um leilao de um produto",
         "parameters": [
           {
@@ -417,9 +397,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "produtos"
-        ],
+        "tags": ["produtos"],
         "summary": "Delete a auction added by the user",
         "parameters": [
           {
@@ -466,9 +444,7 @@
     },
     "/user/{id}/licitation/{licitation_number}": {
       "get": {
-        "tags": [
-          "licitacoes"
-        ],
+        "tags": ["licitacoes"],
         "summary": "O utilizador pode ver as suas licitações",
         "parameters": [
           {
@@ -510,9 +486,7 @@
         }
       },
       "post": {
-        "tags": [
-          "licitacoes"
-        ],
+        "tags": ["licitacoes"],
         "summary": "O utilizador pode fazer uma licitacao",
         "parameters": [
           {
@@ -556,9 +530,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "licitacoes"
-        ],
+        "tags": ["licitacoes"],
         "summary": "Delete a licitation added to a product",
         "parameters": [
           {
@@ -605,9 +577,7 @@
     },
     "/user/{id}/payments/{payment_data}": {
       "get": {
-        "tags": [
-          "pagamentos"
-        ],
+        "tags": ["pagamentos"],
         "summary": "ver todos os pagamentos",
         "parameters": [
           {
@@ -649,9 +619,7 @@
         }
       },
       "put": {
-        "tags": [
-          "pagamentos"
-        ],
+        "tags": ["pagamentos"],
         "summary": "pagar um produto",
         "parameters": [
           {
@@ -699,9 +667,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "pagamentos"
-        ],
+        "tags": ["pagamentos"],
         "summary": "Delete card information and data",
         "parameters": [
           {
@@ -745,9 +711,7 @@
     },
     "/user/{id}/receipt/{receipt_nr}": {
       "get": {
-        "tags": [
-          "pagamentos"
-        ],
+        "tags": ["pagamentos"],
         "summary": "payment receipt",
         "parameters": [
           {
@@ -791,9 +755,7 @@
     },
     "/user/{id}/chat/{message_number}": {
       "get": {
-        "tags": [
-          "conversas"
-        ],
+        "tags": ["conversas"],
         "summary": "chat",
         "parameters": [
           {
@@ -835,9 +797,7 @@
         }
       },
       "put": {
-        "tags": [
-          "conversas"
-        ],
+        "tags": ["conversas"],
         "summary": "chat",
         "parameters": [
           {
@@ -882,9 +842,7 @@
         }
       },
       "post": {
-        "tags": [
-          "conversas"
-        ],
+        "tags": ["conversas"],
         "summary": "chat",
         "parameters": [
           {
@@ -929,9 +887,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "conversas"
-        ],
+        "tags": ["conversas"],
         "summary": "chat",
         "parameters": [
           {
@@ -975,9 +931,7 @@
     },
     "/user/{id}/complaint/{complaint_nr}": {
       "get": {
-        "tags": [
-          "denuncias/reclamacoes"
-        ],
+        "tags": ["denuncias/reclamacoes"],
         "summary": "reclamacoes do utilizador",
         "parameters": [
           {
@@ -1019,9 +973,7 @@
         }
       },
       "post": {
-        "tags": [
-          "denuncias/reclamacoes"
-        ],
+        "tags": ["denuncias/reclamacoes"],
         "summary": "utilizador faz uma reclamacao",
         "parameters": [
           {
@@ -1063,9 +1015,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "denuncias/reclamacoes"
-        ],
+        "tags": ["denuncias/reclamacoes"],
         "summary": "delete solved complaints",
         "parameters": [
           {
@@ -1109,9 +1059,7 @@
     },
     "/user/{id}/delivery/{delivery_number}": {
       "get": {
-        "tags": [
-          "delivery"
-        ],
+        "tags": ["delivery"],
         "summary": "delivery request",
         "parameters": [
           {
@@ -1153,9 +1101,7 @@
         }
       },
       "put": {
-        "tags": [
-          "delivery"
-        ],
+        "tags": ["delivery"],
         "summary": "Sent Product",
         "parameters": [
           {
@@ -1197,9 +1143,7 @@
         }
       },
       "post": {
-        "tags": [
-          "delivery"
-        ],
+        "tags": ["delivery"],
         "summary": "user asks for a delivery of a product",
         "parameters": [
           {
@@ -1241,9 +1185,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "delivery"
-        ],
+        "tags": ["delivery"],
         "summary": "delete old request",
         "parameters": [
           {
@@ -1367,11 +1309,7 @@
         }
       },
       "Chat": {
-        "required": [
-          "message",
-          "productId",
-          "userToContact"
-        ],
+        "required": ["message", "productId", "userToContact"],
         "type": "object",
         "properties": {
           "productId": {
@@ -1472,10 +1410,7 @@
         }
       },
       "Licitation": {
-        "required": [
-          "licitation day",
-          "price"
-        ],
+        "required": ["licitation day", "price"],
         "type": "object",
         "properties": {
           "price": {
@@ -1496,12 +1431,7 @@
         }
       },
       "Auction": {
-        "required": [
-          "dateOfEnd",
-          "dateOfStart",
-          "inicial price",
-          "product id"
-        ],
+        "required": ["dateOfEnd", "dateOfStart", "inicial price", "product id"],
         "type": "object",
         "properties": {
           "product id": {
@@ -1545,11 +1475,7 @@
         }
       },
       "Product": {
-        "required": [
-          "description",
-          "pictures",
-          "title"
-        ],
+        "required": ["description", "pictures", "title"],
         "type": "object",
         "properties": {
           "title": {
@@ -1580,13 +1506,7 @@
         "description": "base64 encoded image"
       },
       "User": {
-        "required": [
-          "dateOfBirth",
-          "email",
-          "id",
-          "name",
-          "securityQuestion"
-        ],
+        "required": ["dateOfBirth", "email", "id", "name", "securityQuestion"],
         "type": "object",
         "properties": {
           "id": {
@@ -1614,9 +1534,7 @@
         }
       },
       "Password": {
-        "required": [
-          "password"
-        ],
+        "required": ["password"],
         "type": "object",
         "properties": {
           "password": {
